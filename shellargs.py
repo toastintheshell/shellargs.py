@@ -8,6 +8,11 @@ import sys
 def sh(script, stdin=None):
     """Returns (stdout, stderr)"""
     import subprocess
+    # This function was originally found on this page: 
+    # https://stackoverflow.com/questions/2651874/embed-bash-in-python
+    # by user: Ian Bicking
+    # Thanks Ian!
+    ##########################################################################
     # Note: by using a list here (['bash', ...]) you avoid quoting 
     # issues, as the arguments are passed in exactly this order (spaces,
     # quotes, and newlines won't cause problems):
