@@ -28,6 +28,8 @@ import sys
 def arg_parser(arg_list):
     # Expects sys.argv - parses arguments into a list of lists 
     # [<num of dashes>, "arg"], each 1-dash char added separately
+    # *** need to add case for -x=... and --xyz=... ***
+    # *** add case for "-x no_dash" and "--xyc no_dash"? ***
     if not type(arg_list) is list: 
         # input sanitization, returns None, allows caller to handle bad input
         # don't know if good practice
