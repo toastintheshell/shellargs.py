@@ -29,15 +29,13 @@ def arg_parser(arg_list):
     # Expects sys.argv - parses arguments into a list specifying class as
     # 0 for no -, 1 for one - where each letter is individually added with
     # a 0 value, and 2 for two dashes. 
-    if not type(arg_list) is list: # input sanitization
-        return [1]
-    if len(arg_list) < 2: # return the empty list if no args passed 
-        return []
-    else:
-        arg_list = arg_list[1:]
+    if not type(arg_list) is list: 
+        # input sanitization, returns None, allows caller to handle bad input
+        # don't know if good practice
+        return
     out = []
     #print arg_list
-    for i in arg_list:
+    for i in arg_list[1:]:
         #print i
         if i[0:2] == "--":
             #print "double-dash argument"
@@ -54,5 +52,5 @@ def arg_parser(arg_list):
     return out
 
 print arg_parser(sys.argv)
-
+print arg_parser("bad input")
 
