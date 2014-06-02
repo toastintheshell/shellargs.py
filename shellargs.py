@@ -26,6 +26,14 @@ def sh(script, stdin=None):
 
 print sys.argv
 
-def argparser(arg_list):
-    #add stuff here
+def arg_parser(arg_list):
+    print arg_list
+    for i in arg_list:
+        print i
+        if i[0:2] == "--":
+            print "double-dash argument"
+        elif i[0] == "-":
+            print "single-dash arguments"
     return 
+
+arg_parser(sys.argv[1:])
