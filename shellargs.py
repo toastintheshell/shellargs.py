@@ -5,35 +5,54 @@
 
 import sys
 
-def sh(script, stdin=None):
-    """Returns (stdout, stderr)"""
-    import subprocess
-    # This function was originally found on this page: 
-    # https://stackoverflow.com/questions/2651874/embed-bash-in-python
-    # by user: Ian Bicking
-    # Thanks Ian!
-    ##########################################################################
-    # Note: by using a list here (['bash', ...]) you avoid quoting 
-    # issues, as the arguments are passed in exactly this order (spaces,
-    # quotes, and newlines won't cause problems):
-    proc = subprocess.Popen(['bash', '-c', script],
-    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-    stdin=subprocess.PIPE)
-    stdout, stderr = proc.communicate()
-    return stdout, stderr
+#def sh(script, stdin=None):
+#    """Returns (stdout, stderr)"""
+#    import subprocess
+#    # This function was originally found on this page: 
+#    # https://stackoverflow.com/questions/2651874/embed-bash-in-python
+#    # by user: Ian Bicking
+#    # Thanks Ian!
+#    ##########################################################################
+#    # Note: by using a list here (['bash', ...]) you avoid quoting 
+#    # issues, as the arguments are passed in exactly this order (spaces,
+#    # quotes, and newlines won't cause problems):
+#    proc = subprocess.Popen(['bash', '-c', script],
+#    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+#    stdin=subprocess.PIPE)
+#    stdout, stderr = proc.communicate()
+#    return stdout, stderr
 
 ##############################################################################
 
-print sys.argv
 
 def arg_parser(arg_list):
-    print arg_list
+    # Expects sys.argv - parses arguments into a list specifying class as
+    # 0 for no -, 1 for one - where each letter is individually added with
+    # a 0 value, and 2 for two dashes. 
+    if not type(arg_list) is list: # input sanitization
+        return [1]
+    if len(arg_list) < 2: # return the empty list if no args passed 
+        return []
+    else:
+        arg_list = arg_list[1:]
+    out = []
+    #print arg_list
     for i in arg_list:
-        print i
+        #print i
         if i[0:2] == "--":
-            print "double-dash argument"
+            #print "double-dash argument"
+            out.append([2, i[2:]])
         elif i[0] == "-":
-            print "single-dash arguments"
-    return 
+            #print "single-dash arguments:"
+            for a in i[1:]:
+                #print a
+                out.append([1, a])
+        else: 
+            #print "dashless argument"
+            out.append([0, i])
+        #print out
+    return out
 
-arg_parser(sys.argv[1:])
+print arg_parser(sys.argv)
+
+
