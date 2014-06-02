@@ -51,6 +51,7 @@ def arg_parser(arg_list):
         #print out
     return out
 
+# testing
 print arg_parser(sys.argv)
 print arg_parser("bad input")
 
