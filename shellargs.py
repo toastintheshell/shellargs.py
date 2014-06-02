@@ -26,9 +26,8 @@ import sys
 
 
 def arg_parser(arg_list):
-    # Expects sys.argv - parses arguments into a list specifying class as
-    # 0 for no -, 1 for one - where each letter is individually added with
-    # a 0 value, and 2 for two dashes. 
+    # Expects sys.argv - parses arguments into a list of lists 
+    # [<num of dashes>, "arg"], each 1-dash char added separately
     if not type(arg_list) is list: 
         # input sanitization, returns None, allows caller to handle bad input
         # don't know if good practice
